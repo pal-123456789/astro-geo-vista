@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      anomaly_detections: {
+        Row: {
+          affected_regions: string[] | null
+          altitude: number | null
+          analysis_results: Json
+          anomaly_type: string
+          confidence_score: number
+          created_at: string
+          detection_time: string
+          duration_estimate: unknown | null
+          id: string
+          latitude: number | null
+          location: unknown | null
+          longitude: number | null
+          mitigation_suggestions: Json | null
+          nasa_source: string
+          predicted_impact_time: string | null
+          raw_data: Json
+          severity: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          affected_regions?: string[] | null
+          altitude?: number | null
+          analysis_results?: Json
+          anomaly_type: string
+          confidence_score: number
+          created_at?: string
+          detection_time?: string
+          duration_estimate?: unknown | null
+          id?: string
+          latitude?: number | null
+          location?: unknown | null
+          longitude?: number | null
+          mitigation_suggestions?: Json | null
+          nasa_source: string
+          predicted_impact_time?: string | null
+          raw_data?: Json
+          severity: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          affected_regions?: string[] | null
+          altitude?: number | null
+          analysis_results?: Json
+          anomaly_type?: string
+          confidence_score?: number
+          created_at?: string
+          detection_time?: string
+          duration_estimate?: unknown | null
+          id?: string
+          latitude?: number | null
+          location?: unknown | null
+          longitude?: number | null
+          mitigation_suggestions?: Json | null
+          nasa_source?: string
+          predicted_impact_time?: string | null
+          raw_data?: Json
+          severity?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       environmental_alerts: {
         Row: {
           alert_type: string
@@ -67,43 +133,85 @@ export type Database = {
       }
       profiles: {
         Row: {
+          alert_preferences: Json | null
           api_access_level: string
           avatar_url: string | null
           created_at: string
+          dashboard_config: Json | null
           full_name: string | null
           id: string
           location_preferences: Json | null
           notification_settings: Json | null
           organization: string | null
           role: string
+          subscription_tier: string | null
           updated_at: string
           user_id: string
         }
         Insert: {
+          alert_preferences?: Json | null
           api_access_level?: string
           avatar_url?: string | null
           created_at?: string
+          dashboard_config?: Json | null
           full_name?: string | null
           id?: string
           location_preferences?: Json | null
           notification_settings?: Json | null
           organization?: string | null
           role?: string
+          subscription_tier?: string | null
           updated_at?: string
           user_id: string
         }
         Update: {
+          alert_preferences?: Json | null
           api_access_level?: string
           avatar_url?: string | null
           created_at?: string
+          dashboard_config?: Json | null
           full_name?: string | null
           id?: string
           location_preferences?: Json | null
           notification_settings?: Json | null
           organization?: string | null
           role?: string
+          subscription_tier?: string | null
           updated_at?: string
           user_id?: string
+        }
+        Relationships: []
+      }
+      real_time_feeds: {
+        Row: {
+          anomaly_score: number | null
+          created_at: string
+          data_source: string
+          feed_type: string
+          id: string
+          processed_data: Json | null
+          raw_data: Json
+          timestamp: string
+        }
+        Insert: {
+          anomaly_score?: number | null
+          created_at?: string
+          data_source: string
+          feed_type: string
+          id?: string
+          processed_data?: Json | null
+          raw_data: Json
+          timestamp: string
+        }
+        Update: {
+          anomaly_score?: number | null
+          created_at?: string
+          data_source?: string
+          feed_type?: string
+          id?: string
+          processed_data?: Json | null
+          raw_data?: Json
+          timestamp?: string
         }
         Relationships: []
       }
@@ -234,6 +342,59 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      user_notifications: {
+        Row: {
+          anomaly_id: string | null
+          created_at: string
+          delivery_status: string | null
+          id: string
+          message: string
+          metadata: Json | null
+          notification_type: string
+          priority: string
+          read_at: string | null
+          sent_at: string | null
+          title: string
+          user_id: string
+        }
+        Insert: {
+          anomaly_id?: string | null
+          created_at?: string
+          delivery_status?: string | null
+          id?: string
+          message: string
+          metadata?: Json | null
+          notification_type: string
+          priority?: string
+          read_at?: string | null
+          sent_at?: string | null
+          title: string
+          user_id: string
+        }
+        Update: {
+          anomaly_id?: string | null
+          created_at?: string
+          delivery_status?: string | null
+          id?: string
+          message?: string
+          metadata?: Json | null
+          notification_type?: string
+          priority?: string
+          read_at?: string | null
+          sent_at?: string | null
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_notifications_anomaly_id_fkey"
+            columns: ["anomaly_id"]
+            isOneToOne: false
+            referencedRelation: "anomaly_detections"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
