@@ -61,7 +61,12 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
-				}
+				},
+				'space-blue': 'hsl(var(--space-blue))',
+				'space-purple': 'hsl(var(--space-purple))',
+				'space-cyan': 'hsl(var(--space-cyan))',
+				'space-orange': 'hsl(var(--space-orange))',
+				'space-green': 'hsl(var(--space-green))'
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -88,7 +93,17 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+				'spin-slow': 'spin 8s linear infinite',
+				'bounce-slow': 'bounce 3s infinite'
+			},
+			backgroundImage: {
+				'gradient-space': 'var(--gradient-space)',
+				'gradient-cosmic': 'var(--gradient-cosmic)',
+				'gradient-aurora': 'var(--gradient-aurora)',
+				'gradient-sunset': 'var(--gradient-sunset)'
 			}
 		}
 	},
