@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import ProtectedRoute from '@/components/auth/ProtectedRoute';
-import AnomalyDashboard from '@/components/anomaly/AnomalyDashboard';
+import MobileApp from './MobileApp';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { motion } from 'framer-motion';
@@ -198,9 +198,7 @@ const Index = () => {
   if (user) {
     return (
       <ProtectedRoute>
-        <div className="min-h-screen p-6">
-          <AnomalyDashboard />
-        </div>
+        <MobileApp />
       </ProtectedRoute>
     );
   }
