@@ -21,8 +21,9 @@ import { AlertsPanel } from './AlertsPanel';
 import { StatsGrid } from './StatsGrid';
 
 const SpaceDashboard = () => {
-  return (
-    <div className="min-h-screen p-6 space-y-6">
+  try {
+    return (
+      <div className="min-h-screen p-6 space-y-6">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: -20 }}
@@ -124,8 +125,19 @@ const SpaceDashboard = () => {
           <MapWidget expanded />
         </TabsContent>
       </Tabs>
-    </div>
-  );
+      </div>
+    );
+  } catch (error) {
+    console.error('SpaceDashboard error:', error);
+    return (
+      <div className="min-h-screen flex items-center justify-center p-6">
+        <div className="text-center space-y-4">
+          <h1 className="text-2xl font-bold text-gradient">TerraPulse</h1>
+          <p className="text-muted-foreground">Initializing Dashboard...</p>
+        </div>
+      </div>
+    );
+  }
 };
 
 export default SpaceDashboard;

@@ -24,23 +24,36 @@ import {
 const MobileApp = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const { isRegistered, sendTestNotification, scheduleHealthReminder } = usePushNotifications();
+  
+  // Add error boundary for push notifications
+  let pushNotifications;
+  try {
+    pushNotifications = usePushNotifications();
+  } catch (error) {
+    console.log('Push notifications not available:', error);
+    pushNotifications = { isRegistered: false, sendTestNotification: () => {}, scheduleHealthReminder: () => {} };
+  }
+  
+  const { isRegistered, sendTestNotification, scheduleHealthReminder } = pushNotifications;
 
   const renderTabContent = () => {
-    switch (activeTab) {
-      case 'dashboard':
-        return <SpaceDashboard />;
-      case 'globe':
-        return (
-          <div className="h-screen w-full">
-            <Globe3D />
-          </div>
-        );
-      case 'health':
-        return <HealthMonitor />;
-      case 'alerts':
-        return <AnomalyDashboard />;
-      case 'settings':
+    try {
+      switch (activeTab) {
+        case 'dashboard':
+          return <SpaceDashboard />;
+        case 'globe':
+          return (
+            <div className="h-screen w-full bg-black">
+              <div className="flex items-center justify-center h-full text-white">
+                <p>3D Globe Loading...</p>
+              </div>
+            </div>
+          );
+        case 'health':
+          return <HealthMonitor />;
+        case 'alerts':
+          return <AnomalyDashboard />;
+        case 'settings':
         return (
           <div className="p-4 space-y-6">
             <motion.div
@@ -176,8 +189,19 @@ const MobileApp = () => {
             </motion.div>
           </div>
         );
-      default:
-        return <SpaceDashboard />;
+        default:
+          return <SpaceDashboard />;
+      }
+    } catch (error) {
+      console.error('Error rendering tab content:', error);
+      return (
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-center space-y-4">
+            <h2 className="text-xl font-bold">TerraPulse</h2>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        </div>
+      );
     }
   };
 
