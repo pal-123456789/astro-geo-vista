@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'app.lovable.2311cd2f77604d04aa2d6f88c63b98e8',
+  appId: 'com.terrapulse.app',
   appName: 'TerraPulse',
   webDir: 'dist',
   server: {
