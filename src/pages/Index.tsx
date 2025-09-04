@@ -195,8 +195,10 @@ const LandingPage = () => {
 const Index = () => {
   const { user } = useAuth();
 
-  // For mobile testing, bypass auth and show the app directly
-  if (window.location.href.includes('capacitor://')) {
+  // For mobile app, always show the app directly without auth
+  if (window.location.protocol === 'capacitor:' || 
+      window.location.href.includes('capacitor://') ||
+      window.navigator.userAgent.includes('Capacitor')) {
     return <MobileApp />;
   }
 

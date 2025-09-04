@@ -18,6 +18,7 @@ import {
   MapPin,
   Heart,
   Activity,
+  Globe2,
   Settings as SettingsIcon
 } from 'lucide-react';
 
@@ -43,9 +44,17 @@ const MobileApp = () => {
           return <SpaceDashboard />;
         case 'globe':
           return (
-            <div className="h-screen w-full bg-black">
-              <div className="flex items-center justify-center h-full text-white">
-                <p>3D Globe Loading...</p>
+            <div className="h-screen w-full bg-gradient-to-br from-space-blue/10 via-background to-space-purple/10">
+              <div className="flex flex-col items-center justify-center h-full space-y-4">
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="p-4 bg-primary/20 rounded-full"
+                >
+                  <Globe2 className="w-8 h-8 text-primary" />
+                </motion.div>
+                <p className="text-lg font-medium">3D Globe</p>
+                <p className="text-muted-foreground">Interactive Earth Visualization</p>
               </div>
             </div>
           );
